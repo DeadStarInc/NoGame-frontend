@@ -19,7 +19,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@argent/get-starknet": "^5.0.6",
+    "@argent/get-starknet": "^5.1.3",
     "@emotion/styled": "^11.10.5",
     "@starknet-react/core": "^0.14.8",
     "api": "^4.5.2",
