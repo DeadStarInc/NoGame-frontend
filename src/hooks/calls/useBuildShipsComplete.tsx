@@ -1,6 +1,6 @@
 import { useAccount, useStarknet } from "@starknet-react/core";
 import { useCallback } from "react";
-import { CommonTransactionReceiptResponse } from "starknet";
+import { CommonTransactionReceiptResponse, Sequencer } from "starknet";
 import { useS2MTransactionManager } from "~/providers/transaction";
 import { useGameContract } from "../game";
 
@@ -26,11 +26,12 @@ export default function useBuildShipComplete(resourceName: ShipType) {
 
         return contract
             .invoke(`${resourceName}BuildComplete`, [])
-            .then((tx: CommonTransactionReceiptResponse) => {
+            .then((tx: Sequencer.AddTransactionResponse) => {
                 console.log("Transaction hash: ", tx.transaction_hash);
 
                 addTransaction({
-                    status: tx.status!,
+                    status: "NOT_RECEIVED",
+                    code: tx.code!,
                     transactionHash: tx.transaction_hash,
                     address: account,
                     lastUpdatedAt: 0,
