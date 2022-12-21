@@ -1,11 +1,6 @@
-import { useAccount, useStarknet } from "@starknet-react/core";
+import { useAccount } from "@starknet-react/core";
 import { useCallback } from "react";
-import {
-    InvokeTransactionResponse,
-    constants,
-    CommonTransactionReceiptResponse,
-    Sequencer,
-} from "starknet";
+import { Sequencer } from "starknet";
 import { useS2MTransactionManager } from "~/providers/transaction";
 import { useGameContract } from "../game";
 
