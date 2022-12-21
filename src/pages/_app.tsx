@@ -4,6 +4,8 @@ import { FixedGlobalStyle, ThemedGlobalStyle } from "../theme";
 import {
     InjectedConnector,
     StarknetProvider,
+    useAccount,
+    useConnectors,
     useStarknet,
     useStarknetCall,
 } from "@starknet-react/core";
@@ -20,7 +22,10 @@ import Dashboard from "./dashboard";
 import "react-tabs/style/react-tabs.css";
 
 const AuthController = ({ Component, pageProps }: AppProps) => {
-    const { account, connect } = useStarknet();
+    const { account } = useStarknet();
+    const { connect } = useConnectors();
+
+    console.log("address", account);
 
     const [walletConnectLoading, setWalletConnectLoading] =
         useState<boolean>(true);
