@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import NextHead from "next/head";
 import { FixedGlobalStyle, ThemedGlobalStyle } from "../theme";
 import {
+    StarknetConfig,
     InjectedConnector,
     StarknetProvider,
     useAccount,
@@ -23,23 +24,23 @@ import "react-tabs/style/react-tabs.css";
 
 const AuthController = ({ Component, pageProps }: AppProps) => {
     const { account } = useStarknet();
-    const { connect } = useConnectors();
-
-    console.log("address", account);
+    const { address } = useAccount();
+    console.log("account", typeof account);
+    // const { connect } = useConnectors();
 
     const [walletConnectLoading, setWalletConnectLoading] =
         useState<boolean>(true);
 
-    const injected = useMemo(
-        () => new InjectedConnector({ options: { id: "argentX" } }),
-        []
-    );
+    // const injected = useMemo(
+    //     () => new InjectedConnector({ options: { id: "argentX" } }),
+    //     []
+    // );
 
-    useEffect(() => {
-        setTimeout(() => {
-            connect(injected);
-        }, 1500);
-    }, [connect, injected]);
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         connect(injected);
+    //     }, 1500);
+    // }, [connect, injected]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -52,7 +53,7 @@ const AuthController = ({ Component, pageProps }: AppProps) => {
     const { data, error, loading } = useStarknetCall({
         contract: erc721Contract,
         method: "ownerToPlanet",
-        args: [account],
+        args: [address],
     });
     const generatePlanet = useGeneratePlanet();
 
@@ -66,7 +67,7 @@ const AuthController = ({ Component, pageProps }: AppProps) => {
         }
     }, [data]);
 
-    if (!account || !hasGeneratedPlanets || loading || walletConnectLoading) {
+    if (!address || !hasGeneratedPlanets || loading || walletConnectLoading) {
         return (
             <AuthScreen
                 address={account}
@@ -78,15 +79,22 @@ const AuthController = ({ Component, pageProps }: AppProps) => {
         );
     }
 
-    // return <Component {...pageProps} />
     return <Dashboard />;
 };
 
 function MyApp(props: AppProps) {
     BigNumber.config({ EXPONENTIAL_AT: 76 });
 
+    const { address } = useAccount();
+    console.log("account", typeof address);
+
+    const connectors = [
+        new InjectedConnector({ options: { id: "braavos" } }),
+        new InjectedConnector({ options: { id: "argentX" } }),
+    ];
+
     return (
-        <StarknetProvider>
+        <StarknetConfig connectors={connectors}>
             <S2MTransactionManagerProvider>
                 <NextHead>
                     <title>NoGame</title>
@@ -98,7 +106,7 @@ function MyApp(props: AppProps) {
                     <AuthController {...props} />
                 </AppWrapper>
             </S2MTransactionManagerProvider>
-        </StarknetProvider>
+        </StarknetConfig>
     );
 }
 
