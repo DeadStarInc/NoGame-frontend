@@ -7,6 +7,7 @@ import {
 
 export interface TransactionSubmitted {
     status: Status;
+    code: TransactionStatus;
     transactionHash: string;
     lastUpdatedAt: number;
     address?: string;
@@ -15,6 +16,7 @@ export interface TransactionSubmitted {
 
 export interface TransactionReceived {
     status: Status;
+    code: TransactionStatus;
     transaction: S2MTransaction;
     transactionHash: string;
     lastUpdatedAt: number;
