@@ -120,6 +120,12 @@ export interface EndShipsCompletion {
     timeEnd: number;
 }
 
+export interface EndDefenceCompletion {
+    defenceId: number;
+    units: number;
+    timeEnd: number;
+}
+
 export interface EndTechCompletion {
     techId: number;
     timeEnd: number;
