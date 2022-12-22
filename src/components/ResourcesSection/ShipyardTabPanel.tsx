@@ -21,14 +21,14 @@ interface Props {
     endShipsCompletion?: EndShipsCompletion;
     playerResources?: Points;
     fleetLevels?: FleetLevels;
-    FleetCost?: FleetCost;
+    fleetCost?: FleetCost;
 }
 
 export const ShipyardTabPanel = ({
     endShipsCompletion,
     playerResources,
     fleetLevels,
-    FleetCost,
+    fleetCost,
     ...rest
 }: Props) => {
     const [isUpgrading, setIsUpgrading] = useState(false);
@@ -51,11 +51,11 @@ export const ShipyardTabPanel = ({
                 level={fleetLevels?.cargo}
                 time={getEndTime(31)}
                 isUpgrading={isUpgrading}
-                costUpdate={FleetCost?.cargo}
+                costUpdate={fleetCost?.cargo}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.cargo, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.cargo, playerResources)
                 }
             />
             <ShipyardBox
@@ -64,12 +64,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="espionageProbe"
                 level={fleetLevels?.probe}
                 time={getEndTime(33)}
-                costUpdate={FleetCost?.probe}
+                costUpdate={fleetCost?.probe}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.probe, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.probe, playerResources)
                 }
             />
             <ShipyardBox
@@ -78,12 +78,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="solarSatellite"
                 level={fleetLevels?.satellite}
                 time={getEndTime(34)}
-                costUpdate={FleetCost?.satellite}
+                costUpdate={fleetCost?.satellite}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.satellite, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.satellite, playerResources)
                 }
             />
             <ShipyardBox
@@ -92,12 +92,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="lightFighter"
                 level={fleetLevels?.fighter}
                 time={getEndTime(35)}
-                costUpdate={FleetCost?.fighter}
+                costUpdate={fleetCost?.fighter}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.fighter, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.fighter, playerResources)
                 }
             />
             <ShipyardBox
@@ -106,12 +106,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="recyclerShip"
                 level={fleetLevels?.recycler}
                 time={getEndTime(32)}
-                costUpdate={FleetCost?.recycler}
+                costUpdate={fleetCost?.recycler}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.recycler, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.recycler, playerResources)
                 }
             />
             <ShipyardBox
@@ -120,12 +120,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="cruiser"
                 level={fleetLevels?.cruiser}
                 time={getEndTime(36)}
-                costUpdate={FleetCost?.cruiser}
+                costUpdate={fleetCost?.cruiser}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.cruiser, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.cruiser, playerResources)
                 }
             />
             <ShipyardBox
@@ -134,12 +134,12 @@ export const ShipyardTabPanel = ({
                 functionCallName="battleShip"
                 level={fleetLevels?.battleship}
                 time={getEndTime(37)}
-                costUpdate={FleetCost?.battleship}
+                costUpdate={fleetCost?.battleship}
                 isUpgrading={isUpgrading}
                 hasEnoughResources={
                     playerResources &&
-                    FleetCost &&
-                    calculEnoughResources(FleetCost.battleship, playerResources)
+                    fleetCost &&
+                    calculEnoughResources(fleetCost.battleship, playerResources)
                 }
             />
         </StyledTabPanel>
