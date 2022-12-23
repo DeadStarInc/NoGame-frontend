@@ -11,8 +11,9 @@ import { useAccount, useStarknet, useStarknetCall } from "@starknet-react/core";
 import { useGameContract } from "~/hooks/game";
 import { differenceInMinutes, fromUnixTime } from "date-fns";
 import { dataToNumber, E18ToNumber, numberWithCommas } from "~/utils";
-import { ResearchTabPanel } from "~/components/ResourcesSection/LabTabPanel";
-import { ShipyardTabPanel } from "~/components/ResourcesSection/ShipyardTabPanel";
+import { ResearchTabPanel } from "./LabTabPanel";
+import { ShipyardTabPanel } from "./ShipyardTabPanel";
+import { DefenceTabPanel } from "./DefencesTabPanel";
 import { EmptyTabPanel } from "./EmptyTabPanel";
 import { ADDRCONFIG } from "dns";
 
@@ -67,6 +68,24 @@ export const ResourcesSection: FC = () => {
         contract: gameContract,
         method: "getShipsCost",
         args: [],
+    });
+
+    const { data: defencesLevels } = useStarknetCall({
+        contract: gameContract,
+        method: "getDefenceLevels",
+        args: [address],
+    });
+
+    const { data: defencesCost } = useStarknetCall({
+        contract: gameContract,
+        method: "getDefencesCost",
+        args: [],
+    });
+
+    const { data: defenceCompletion } = useStarknetCall({
+        contract: gameContract,
+        method: "getDefenceQueStatus",
+        args: [address],
     });
 
     const { data: shipsCompletion } = useStarknetCall({
@@ -276,6 +295,24 @@ export const ResourcesSection: FC = () => {
         }
     }, [shipsCompletion]);
 
+    const endDefenceCompletion = useMemo(() => {
+        if (defenceCompletion) {
+            const end = fromUnixTime(
+                dataToNumber(defenceCompletion["status"].lock_end)
+            );
+            const timeDifferenceInMinutes = differenceInMinutes(
+                end,
+                new Date()
+            );
+            return {
+                defenceId: dataToNumber(defenceCompletion["status"].defence_id),
+                units: dataToNumber(defenceCompletion["status"].units),
+                timeEnd:
+                    timeDifferenceInMinutes > 0 ? timeDifferenceInMinutes : 0,
+            };
+        }
+    }, [defenceCompletion]);
+
     const fleetLevels = useMemo(() => {
         if (shipsLevels) {
             return {
@@ -289,6 +326,23 @@ export const ResourcesSection: FC = () => {
             };
         }
     }, [shipsLevels]);
+
+    const defenceLevels = useMemo(() => {
+        if (defenceLevels) {
+            return {
+                rocket: dataToNumber(defenceLevels["result"].rocket),
+                lightLaser: dataToNumber(defenceLevels["result"].light_laser),
+                heavyLaser: dataToNumber(defenceLevels["result"].heavy_laser),
+                ionCannon: dataToNumber(defenceLevels["result"].ion_cannon),
+                gauss: dataToNumber(defenceLevels["result"].gauss),
+                plasmaTurret: dataToNumber(
+                    defenceLevels["result"].plasma_turret
+                ),
+                smallDome: dataToNumber(defenceLevels["result"].small_dome),
+                largeDome: dataToNumber(defenceLevels["result"].large_dome),
+            };
+        }
+    }, [defencesLevels]);
 
     const fleetCost = useMemo(() => {
         if (shipsCost) {
@@ -337,6 +391,67 @@ export const ResourcesSection: FC = () => {
             };
         }
     }, [shipsCost]);
+
+    const defenceCost = useMemo(() => {
+        if (defencesCost) {
+            return {
+                rocket: {
+                    metal: dataToNumber(defencesCost["rocket"].metal),
+                    crystal: dataToNumber(defencesCost["rocket"].crystal),
+                    deuterium: dataToNumber(defencesCost["rocket"].deuterium),
+                },
+                lightLaser: {
+                    metal: dataToNumber(defencesCost["light_laser"].metal),
+                    crystal: dataToNumber(defencesCost["light_laser"].crystal),
+                    deuterium: dataToNumber(
+                        defencesCost["light_laser"].deuterium
+                    ),
+                },
+                heavyLaser: {
+                    metal: dataToNumber(defencesCost["heavy_laser"].metal),
+                    crystal: dataToNumber(defencesCost["heavy_laser"].crystal),
+                    deuterium: dataToNumber(
+                        defencesCost["heavy_laser"].deuterium
+                    ),
+                },
+                ionCannon: {
+                    metal: dataToNumber(defencesCost["ion_cannon"].metal),
+                    crystal: dataToNumber(defencesCost["ion_cannon"].crystal),
+                    deuterium: dataToNumber(
+                        defencesCost["ion_cannon"].deuterium
+                    ),
+                },
+                gauss: {
+                    metal: dataToNumber(defencesCost["gauss"].metal),
+                    crystal: dataToNumber(defencesCost["gauss"].crystal),
+                    deuterium: dataToNumber(defencesCost["gauss"].deuterium),
+                },
+                plasmaTurret: {
+                    metal: dataToNumber(defencesCost["plasma_turret"].metal),
+                    crystal: dataToNumber(
+                        defencesCost["plasma_turret"].crystal
+                    ),
+                    deuterium: dataToNumber(
+                        defencesCost["plasma_turret"].deuterium
+                    ),
+                },
+                smallDome: {
+                    metal: dataToNumber(defencesCost["small_dome"].metal),
+                    crystal: dataToNumber(defencesCost["small_dome"].crystal),
+                    deuterium: dataToNumber(
+                        defencesCost["small_dome"].deuterium
+                    ),
+                },
+                largeDome: {
+                    metal: dataToNumber(defencesCost["large_dome"].metal),
+                    crystal: dataToNumber(defencesCost["large_dome"].crystal),
+                    deuterium: dataToNumber(
+                        defencesCost["large_dome"].deuterium
+                    ),
+                },
+            };
+        }
+    }, [defencesCost]);
 
     const techLevels = useMemo(() => {
         if (technologiesLevels) {
@@ -592,7 +707,13 @@ export const ResourcesSection: FC = () => {
                 endShipsCompletion={endShipsCompletion}
                 playerResources={playerResources}
                 fleetLevels={fleetLevels}
-                FleetCost={fleetCost}
+                fleetCost={fleetCost}
+            />
+            <DefenceTabPanel
+                endDefenceCompletion={endDefenceCompletion}
+                playerResources={playerResources}
+                defenceLevels={defenceLevels}
+                defenceCost={defenceCost}
             />
             <ResearchTabPanel
                 endTechCompletion={endTechCompletion}
