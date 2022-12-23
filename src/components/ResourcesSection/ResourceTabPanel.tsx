@@ -43,7 +43,7 @@ export const ResourceTabPanel = ({
         <StyledTabPanel {...rest}>
             <ResourceBox
                 img={MetalImg}
-                title="Metal Mine"
+                title="Steel Mine"
                 functionCallName="metal"
                 level={resourceLevels?.metal}
                 time={getEndTime(41)}
@@ -60,7 +60,7 @@ export const ResourceTabPanel = ({
             />
             <ResourceBox
                 img={CrystalImg}
-                title="Crystal Mine"
+                title="Quartz Mine"
                 functionCallName="crystal"
                 level={resourceLevels?.crystal}
                 time={getEndTime(42)}
@@ -77,7 +77,7 @@ export const ResourceTabPanel = ({
             />
             <ResourceBox
                 img={DeuteriumImg}
-                title="Deuterium Mine"
+                title="Tritium Mine"
                 functionCallName="deuterium"
                 level={resourceLevels?.deuterium}
                 time={getEndTime(43)}
