@@ -46,7 +46,7 @@ export const ShipyardTabPanel = ({
         <StyledTabPanel {...rest}>
             <ShipyardBox
                 img={CargoImg}
-                title="Light Cargo"
+                title="Light Transport Ship"
                 functionCallName="cargoShip"
                 level={fleetLevels?.cargo}
                 time={getEndTime(31)}
@@ -60,7 +60,7 @@ export const ShipyardTabPanel = ({
             />
             <ShipyardBox
                 img={ProbeImg}
-                title="Espionage Probe"
+                title="Sniffer"
                 functionCallName="espionageProbe"
                 level={fleetLevels?.probe}
                 time={getEndTime(33)}
@@ -102,7 +102,7 @@ export const ShipyardTabPanel = ({
             />
             <ShipyardBox
                 img={RecyclerImg}
-                title="Recycler"
+                title="Debris Remover"
                 functionCallName="recyclerShip"
                 level={fleetLevels?.recycler}
                 time={getEndTime(32)}
@@ -116,7 +116,7 @@ export const ShipyardTabPanel = ({
             />
             <ShipyardBox
                 img={CruiserImg}
-                title="Cruiser"
+                title="Frigate"
                 functionCallName="cruiser"
                 level={fleetLevels?.cruiser}
                 time={getEndTime(36)}
@@ -130,7 +130,7 @@ export const ShipyardTabPanel = ({
             />
             <ShipyardBox
                 img={BattleshipImg}
-                title="Battle Ship"
+                title="Warship"
                 functionCallName="battleShip"
                 level={fleetLevels?.battleship}
                 time={getEndTime(37)}
