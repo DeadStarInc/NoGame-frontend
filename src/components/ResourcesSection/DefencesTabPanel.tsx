@@ -10,10 +10,10 @@ import DefencesBox from "../DefencesBox";
 import { calculEnoughResources } from "~/utils";
 import RocketImg from "~/assets/defences/rocket.jpg";
 import LightLaserImg from "~/assets/defences/light-laser.jpg";
-import HeavyLaserImg from "~/assets/defences/light-laser.jpg";
+import HeavyLaserImg from "~/assets/defences/heavy-laser.jpg";
 import IonCannonImg from "~/assets/defences/ion-cannon.jpg";
 import GaussImg from "~/assets/defences/gauss.jpg";
-import PlasmaImg from "~/asset/defences/plasma-turret.jpg";
+import PlasmaTurretImg from "~/assets/defences/plasma-turret.jpg";
 import SmallDomeImg from "~/assets/defences/small-dome.jpg";
 import LargeDomeImg from "~/assets/defences/large-dome.jpg";
 
@@ -46,7 +46,7 @@ export const DefenceTabPanel = ({
         <StyledTabPanel {...rest}>
             <DefencesBox
                 img={RocketImg}
-                title="Rocket Launcher"
+                title="Missiles Launcher"
                 functionCallName="rocket"
                 level={defenceLevels?.rocket}
                 time={getEndTime(31)}
@@ -60,7 +60,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={LightLaserImg}
-                title="Light Laser"
+                title="Light Photon Gun"
                 functionCallName="lightLaser"
                 level={defenceLevels?.lightLaser}
                 time={getEndTime(31)}
@@ -77,7 +77,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={HeavyLaserImg}
-                title="Heavy Laser"
+                title="Heavy Photon Gun"
                 functionCallName="heavyLaser"
                 level={defenceLevels?.heavyLaser}
                 time={getEndTime(31)}
@@ -94,7 +94,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={IonCannonImg}
-                title="Ion Cannon"
+                title="Electron Cannon"
                 functionCallName="ionCannon"
                 level={defenceLevels?.ionCannon}
                 time={getEndTime(31)}
@@ -111,7 +111,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={GaussImg}
-                title="Gauss Cannon"
+                title="Electromagnetic Cannon"
                 functionCallName="gauss"
                 level={defenceLevels?.gauss}
                 time={getEndTime(31)}
@@ -124,8 +124,8 @@ export const DefenceTabPanel = ({
                 }
             />
             <DefencesBox
-                img={PlasmaImg}
-                title="Plasma Turret"
+                img={PlasmaTurretImg}
+                title="Plasma Projector"
                 functionCallName="plasmaTurret"
                 level={defenceLevels?.plasmaTurret}
                 time={getEndTime(31)}
@@ -142,7 +142,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={SmallDomeImg}
-                title="Small Dome"
+                title="Small Energy Shield"
                 functionCallName="smallDome"
                 level={defenceLevels?.smallDome}
                 time={getEndTime(31)}
@@ -159,7 +159,7 @@ export const DefenceTabPanel = ({
             />
             <DefencesBox
                 img={LargeDomeImg}
-                title="Large Dome"
+                title="Large Energy Shield"
                 functionCallName="largeDome"
                 level={defenceLevels?.largeDome}
                 time={getEndTime(31)}
@@ -177,3 +177,5 @@ export const DefenceTabPanel = ({
         </StyledTabPanel>
     );
 };
+
+DefenceTabPanel.tabsRole = "TabPanel";
