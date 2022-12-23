@@ -61,7 +61,7 @@ export const FacilitiesTabPanel = ({
         <StyledTabPanel {...rest}>
             <FacilitiesBox
                 img={RobotImg}
-                title="Robot Factory"
+                title="Automation Plant"
                 functionCallName="robot"
                 level={facilitiesLevels?.robots}
                 time={getEndTime(21)}
@@ -78,7 +78,7 @@ export const FacilitiesTabPanel = ({
             />
             <FacilitiesBox
                 img={ShipyardImg}
-                title="Shipyard"
+                title="Dockyard"
                 functionCallName="shipyard"
                 level={facilitiesLevels?.shipyard}
                 time={getEndTime(22)}
@@ -95,7 +95,7 @@ export const FacilitiesTabPanel = ({
             />
             <FacilitiesBox
                 img={ResearchLabImg}
-                title="Research Lab"
+                title="Science Lab"
                 functionCallName="research"
                 level={facilitiesLevels?.lab}
                 time={getEndTime(23)}
@@ -112,7 +112,7 @@ export const FacilitiesTabPanel = ({
             />
             <FacilitiesBox
                 img={NaniteImg}
-                title="Nanite Factory"
+                title="Microtech Factory"
                 functionCallName="nanite"
                 level={facilitiesLevels?.nanite}
                 time={getEndTime(24)}
