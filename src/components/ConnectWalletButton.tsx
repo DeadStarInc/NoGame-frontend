@@ -3,6 +3,7 @@ import { InjectedConnector } from "@starknet-react/core";
 import { useEffect, useMemo } from "react";
 import ClassicButton from "~/components/UIComponents/Buttons/ClassicButton";
 import { ButtonPrimary } from "./Button";
+import ControllerConnector from "@cartridge/connector";
 
 export function ConnectWalletButton() {
     const { connect } = useConnectors();
@@ -11,6 +12,7 @@ export function ConnectWalletButton() {
         new InjectedConnector({ options: { id: "braavos" } }),
         new InjectedConnector({ options: { id: "argentX" } }),
     ];
+    const cartridge = new ControllerConnector();
 
     useEffect(() => {
         if (window.starknet) {
@@ -29,11 +31,39 @@ export function ConnectWalletButton() {
     }
 
     return (
-        <ButtonPrimary
-            letterSpacing={"0.02em"}
-            onClick={() => connect(connectors[1])}
-        >
-            CONNECT WALLET
-        </ButtonPrimary>
+        <>
+            <ButtonPrimary
+                letterSpacing={"0.02em"}
+                onClick={() => connect(connectors[0])}
+            >
+                CONNECT BRAVOOS
+            </ButtonPrimary>
+            <div
+                style={{
+                    width: "4px",
+                    height: "auto",
+                    display: "inline-block",
+                }}
+            ></div>
+            <ButtonPrimary
+                letterSpacing={"0.02em"}
+                onClick={() => connect(connectors[1])}
+            >
+                CONNECT ARGENT
+            </ButtonPrimary>
+            <div
+                style={{
+                    width: "4px",
+                    height: "auto",
+                    display: "inline-block",
+                }}
+            ></div>
+            <ButtonPrimary
+                letterSpacing={"0.02em"}
+                onClick={() => connect(cartridge)}
+            >
+                CONNECT TO CARTRIDGE
+            </ButtonPrimary>
+        </>
     );
 }
