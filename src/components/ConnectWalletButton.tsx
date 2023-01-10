@@ -5,14 +5,15 @@ import ClassicButton from "~/components/UIComponents/Buttons/ClassicButton";
 import { ButtonPrimary } from "./Button";
 import ControllerConnector from "@cartridge/connector";
 
+const connectors = [
+    new InjectedConnector({ options: { id: "braavos" } }),
+    new InjectedConnector({ options: { id: "argentX" } }),
+    new ControllerConnector()
+];
+
 export function ConnectWalletButton() {
     const { connect } = useConnectors();
     const { address } = useAccount();
-    const connectors = [
-        new InjectedConnector({ options: { id: "braavos" } }),
-        new InjectedConnector({ options: { id: "argentX" } }),
-    ];
-    const cartridge = new ControllerConnector();
 
     useEffect(() => {
         if (window.starknet) {
@@ -60,7 +61,7 @@ export function ConnectWalletButton() {
             ></div>
             <ButtonPrimary
                 letterSpacing={"0.02em"}
-                onClick={() => connect(cartridge)}
+                onClick={() => connect(connectors[2])}
             >
                 CONNECT TO CARTRIDGE
             </ButtonPrimary>
