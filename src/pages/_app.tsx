@@ -25,22 +25,10 @@ import "react-tabs/style/react-tabs.css";
 const AuthController = ({ Component, pageProps }: AppProps) => {
     const { account } = useStarknet();
     const { address } = useAccount();
-    console.log("account", typeof account);
     // const { connect } = useConnectors();
 
     const [walletConnectLoading, setWalletConnectLoading] =
         useState<boolean>(true);
-
-    // const injected = useMemo(
-    //     () => new InjectedConnector({ options: { id: "argentX" } }),
-    //     []
-    // );
-
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         connect(injected);
-    //     }, 1500);
-    // }, [connect, injected]);
 
     useEffect(() => {
         setTimeout(() => {
